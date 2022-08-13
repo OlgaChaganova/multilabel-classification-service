@@ -1,0 +1,7 @@
+[core]
+    remote = dvc_remote_staging
+[cache]
+    type = "hardlink,symlink"
+['remote "dvc_remote_staging"']
+    url = ssh://91.206.15.25/home/oliyyaa/dvc_files
+    user = oliyyaa
