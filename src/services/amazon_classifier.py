@@ -12,8 +12,8 @@ class AmazonClassifier(object):
         self._device = config['device']
 
         self._model = torch.jit.load(self._model_path, map_location=self._device)
-        self._classes: tp.List[str] = self._model.classes
-        self._img_size: tp.Tuple[int, int] = (self._model.size, self._model.size)
+        self._classes: np.array = np.array(self._model.classes)
+        self._img_size: tp.Tuple[int, int] = (self._model.img_size, self._model.img_size)
         self._threshold: float = self._model.threshold
 
     @property
