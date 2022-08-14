@@ -3,5 +3,7 @@ fastapi==0.79.0
 numpy==1.23.1
 omegaconf==2.2.2
 opencv_python==4.6.0.66
+pytest==7.1.2
+setuptools==61.2.0
 torch==1.12.1
 uvicorn==0.18.2
