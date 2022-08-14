@@ -3,7 +3,7 @@ DOCKER_TAG := latest
 
 .PHONY: run_app
 run_app:
-	python3 -m uvicorn app:app --host='0.0.0.0' --port=$(APP_PORT)
+	python3 -m uvicorn app:amazon_app --host='0.0.0.0' --port=$(APP_PORT)
 
 
 .PHONY: install
@@ -20,3 +20,8 @@ download_weights:
 .PHONY: lint
 lint:
 	PYTHONPATH=. flake8 src/
+
+
+.PHONY: run_unit_tests
+run_unit_tests:
+	python -m pytest tests/unit
