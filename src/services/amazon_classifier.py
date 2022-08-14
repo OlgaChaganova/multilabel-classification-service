@@ -35,8 +35,8 @@ class AmazonClassifier(object):
         return probs.numpy()
 
     def _postprocess_predict(self, probs: np.ndarray) -> tp.List[str]:
-        return self._classes[probs > self._threshold]
+        return self._classes[probs > self._threshold].tolist()
 
-    def _postprocess_predict_proba(self, predict: np.ndarray) -> tp.Dict[str, float]:  # TODO
+    def _postprocess_predict_proba(self, predict: np.ndarray) -> tp.Dict[str, float]:
         sorted_idxs = reversed(predict.argsort())
         return {self._classes[ind]: float(predict[ind]) for ind in sorted_idxs}
