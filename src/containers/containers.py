@@ -14,5 +14,5 @@ class AppContainer(containers.DeclarativeContainer):
 
     amazon_classifier_service = providers.Singleton(
         AmazonClassifierService,
-        amazon_classifier=amazon_classifier,
+        classifier=amazon_classifier,
     )
