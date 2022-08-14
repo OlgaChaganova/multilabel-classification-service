@@ -13,4 +13,4 @@ install:
 
 .PHONY: download_weights
 download_weights:
-	dvc pull -R weights
+	dvc get git@gitlab.com:oliyyaa/cvr-hw1-modeling.git weights/ -o models/
