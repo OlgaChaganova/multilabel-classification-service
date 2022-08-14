@@ -14,7 +14,7 @@ class AmazonClassifierService(object):
 
     @property
     def land_types(self):
-        return self._classifier.classes
+        return list(self._classifier.classes)
 
     def predict(self, image: np.array) -> tp.List[str]:
         return self._classifier.predict(image)
