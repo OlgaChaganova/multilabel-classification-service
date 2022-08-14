@@ -21,8 +21,8 @@ def predict(
     service: AmazonClassifierService = Depends(Provide[AppContainer.amazon_classifier_service]),
 ):
     img = cv2.imdecode(np.frombuffer(image, np.uint8), cv2.IMREAD_COLOR)
-    land_types = service.predict(img)
-    return {'land_types': land_types}
+    predicted_land_types = service.predict(img)
+    return {'land_types': predicted_land_types}
 
 
 @router.post('/predict_proba')
