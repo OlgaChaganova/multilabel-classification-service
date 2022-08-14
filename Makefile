@@ -25,3 +25,14 @@ lint:
 .PHONY: run_unit_tests
 run_unit_tests:
 	python -m pytest tests/unit
+
+
+.PHONY: run_integration_tests
+run_integration_tests:
+	python -m pytest tests/integration
+
+
+.PHONY: run_tests
+run_tests:
+	make run_unit_tests
+	make run_integration_tests
