@@ -1,22 +1,13 @@
-import typing as tp
 import uvicorn
 from fastapi import FastAPI
-from pydantic import BaseModel
+from omegaconf import OmegaConf
 
 
-class Item(BaseModel):
-    name: str
-    price: float
-    is_offer: tp.Optional[bool] = None
+def create_app() -> FastAPI:
+    app = FastAPI()
+    return app
 
-app = FastAPI()
+app = create_app()
 
-
-@app.get('/hello')
-def root():
-    return {'message': 'hello, world!'}
-
-
-@app.post('/items/{item_id}')
-def create_item(item_id: int, item: Item):
-    return {'item_name': item.name, 'item_id': item_id}
+if __name__ == '__main__':
+    uvicorn.run(app, port=2444, host='0.0.0.0')
