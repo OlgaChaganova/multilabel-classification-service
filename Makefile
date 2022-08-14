@@ -12,9 +12,15 @@ install:
 	python3 -m pip install wemake-python-styleguide==0.16.1
 
 
-.PHONY: download_weights
-download_weights:
+.PHONY: download_weights_ssh
+download_weights_ssh:
 	dvc get git@gitlab.com:oliyyaa/cvr-hw1-modeling.git weights/ -o models/
+
+
+.PHONY: download_weights_dvc
+download_weights_dvc:
+	dvc pull -R weights
+	mv densenet121_ce.pt mobilenet_v3_small_ce.pt models/
 
 
 .PHONY: lint
