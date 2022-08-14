@@ -9,8 +9,14 @@ run_app:
 .PHONY: install
 install:
 	pip install -r requirements.txt
+	python3 -m pip install wemake-python-styleguide==0.16.1
 
 
 .PHONY: download_weights
 download_weights:
 	dvc get git@gitlab.com:oliyyaa/cvr-hw1-modeling.git weights/ -o models/
+
+
+.PHONY: lint
+lint:
+	PYTHONPATH=. flake8 src/
