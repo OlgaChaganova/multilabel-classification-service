@@ -1,0 +1,11 @@
+image_name,tags
+train_4,agriculture clear habitation primary road
+train_10,agriculture clear primary slash_burn water
+train_12,cloudy
+train_24,conventional_mine partly_cloudy primary
+train_43,bare_ground haze
+train_57,artisinal_mine bare_ground clear primary water
+train_67,clear habitation primary road
+train_82,blooming clear cultivation habitation primary slash_burn
+train_166,clear primary road selective_logging water
+train_192,blow_down clear primary
