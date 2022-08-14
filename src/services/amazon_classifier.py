@@ -9,7 +9,7 @@ from src.services.preprocess_images import preprocess_image
 class AmazonClassifier(object):
     def __init__(self, config: tp.Dict):
         self._model_path = config['model_path']
-        self._device = config['map_location']
+        self._device = config['device']
 
         self._model = torch.jit.load(self._model_path, map_location=self._device)
         self._classes: tp.List[str] = self._model.classes
@@ -28,7 +28,7 @@ class AmazonClassifier(object):
         probs = self._predict(image)
         return self._postprocess_predict_proba(probs)
 
-    def _predict(self, image: np.array) -> np.array():
+    def _predict(self, image: np.array) -> np.array:
         batch = preprocess_image(image, self._img_size).to(self._device)
         with torch.no_grad():
             probs = self._model(batch).detach().cpu()[0]
