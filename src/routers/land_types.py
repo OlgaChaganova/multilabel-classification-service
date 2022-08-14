@@ -10,10 +10,8 @@ from src.services.amazon_classifier_service import AmazonClassifierService
 
 @router.get('/land_types')
 @inject
-def genres_list(service: AmazonClassifierService = Depends(Provide[AppContainer.amazon_classifier_service])):
-    return {
-        'land_types': service.land_types,
-    }
+def land_types(service: AmazonClassifierService = Depends(Provide[AppContainer.amazon_classifier_service])):
+    return {'land_types': service.land_types}
 
 
 @router.post('/predict')
@@ -24,7 +22,6 @@ def predict(
 ):
     img = cv2.imdecode(np.frombuffer(image, np.uint8), cv2.IMREAD_COLOR)
     land_types = service.predict(img)
-
     return {'land_types': land_types}
 
 
