@@ -16,6 +16,6 @@ WORKDIR /amazon_service
 
 COPY . /amazon_service/
 
-RUN make install && make init_dvc && make download_weights_dvc
+RUN make install && make download_weights_dvc
 
 CMD make run_app
