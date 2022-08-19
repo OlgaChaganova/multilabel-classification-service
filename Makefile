@@ -38,10 +38,7 @@ download_weights_ssh:
 .PHONY: download_weights_dvc
 download_weights_dvc:
 	dvc pull -R weights
-	mv densenet121_ce.pt mobilenet_v3_small_ce.pt models/
-	cd models/
-	ls -lh
-	cd ../
+	mv weights/*.pt models/
 
 
 .PHONY: lint
