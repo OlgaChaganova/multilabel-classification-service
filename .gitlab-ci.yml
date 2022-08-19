@@ -28,12 +28,14 @@ unit_tests:
     stage: tests
     script:
       - ls
-      - make install_c_libs && make install && make download_weights_dvc
+      - make install_c_libs && make install
+      - dvc remote modify --local dvc_remote_staging keyfile ~/.ssh/id_rsa && make download_weights_dvc
       - make run_unit_tests
 
 integration_tests:
     stage: tests
     script:
       - ls
-      - make install_c_libs && make install && make download_weights_dvc
+      - make install_c_libs && make install
+      - dvc remote modify --local dvc_remote_staging keyfile ~/.ssh/id_rsa && make download_weights_dvc
       - make run_integration_tests
