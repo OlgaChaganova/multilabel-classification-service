@@ -11,10 +11,10 @@ RUN apt-get update && \
     libsm6 \
     libxext6
 
-RUN make install
-
 WORKDIR /amazon_service
 
 COPY . /amazon_service/
+
+RUN make install
 
 CMD make run_app
