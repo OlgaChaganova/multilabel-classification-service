@@ -1,5 +1,4 @@
-FROM ubuntu:20.04
-
+FROM python:slim
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
@@ -12,10 +11,10 @@ RUN apt-get update && \
     libsm6 \
     libxext6
 
+RUN make install
+
 WORKDIR /amazon_service
 
 COPY . /amazon_service/
-
-RUN make install && make download_weights_dvc
 
 CMD make run_app
