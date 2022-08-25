@@ -1,7 +1,8 @@
 DVC_REMOTE_NAME := dvc_remote_staging
-USERNAME: oliyyaa
+USERNAME := oliyyaa
 
 APP_PORT := 2202
+DOCKER_IMAGE := oliyyaa_amazon_service
 DOCKER_TAG := latest
 
 
@@ -41,6 +42,7 @@ download_weights_dvc:
 	mv weights/*.pt models/
 
 
+
 .PHONY: lint
 lint:
 	PYTHONPATH=. flake8 src/
@@ -60,3 +62,8 @@ run_integration_tests:
 run_tests:
 	make run_unit_tests
 	make run_integration_tests
+
+
+.PHONY: build
+build:
+	docker build -f Dockerfile -t $(DOCKER_IMAGE):$(DOCKER_TAG) --force-rm=true .
