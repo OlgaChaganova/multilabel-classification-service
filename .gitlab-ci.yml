@@ -31,6 +31,7 @@ unit_tests:
       - make install_c_libs && make install && make download_weights_dvc
       - make run_unit_tests
 
+
 integration_tests:
     stage: tests
     script:
