@@ -16,6 +16,7 @@ after_script:
 stages:
   - lint
   - tests
+  - build
 
 
 lint:
