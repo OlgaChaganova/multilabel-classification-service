@@ -3,6 +3,7 @@ image: python:3.10
 variables:
   DOCKER_IMAGE: $CI_REGISTRY_IMAGE
   DOCKER_TAG: $CI_COMMIT_SHORT_SHA
+  TOKEN: $READ_TOKEN  # gitlab variable
 
 before_script:
     - mkdir ~/.ssh
@@ -62,7 +63,7 @@ prepare:
     ANSIBLE_HOST_KEY_CHECKING: "false"
   script:
     - python3 -m pip install ansible==6.3.0
-    - make deploy DOCKER_IMAGE=${DOCKER_IMAGE} DOCKER_TAG=${DOCKER_TAG} TAGS=prepare
+    - make deploy DOCKER_IMAGE=${DOCKER_IMAGE} DOCKER_TAG=${DOCKER_TAG} TOKEN=$(TOKEN) TAGS=prepare
   when: manual
 
 
@@ -72,7 +73,7 @@ pull:
     ANSIBLE_HOST_KEY_CHECKING: "false"
   script:
     - python3 -m pip install ansible==6.3.0
-    - make deploy DOCKER_IMAGE=${DOCKER_IMAGE} DOCKER_TAG=${DOCKER_TAG} TAGS=pull
+    - make deploy DOCKER_IMAGE=${DOCKER_IMAGE} DOCKER_TAG=${DOCKER_TAG} TOKEN=$(TOKEN) TAGS=pull
   when: manual
 
 
@@ -82,7 +83,7 @@ deploy:
     ANSIBLE_HOST_KEY_CHECKING: "false"
   script:
     - python3 -m pip install ansible==6.3.0
-    - make deploy DOCKER_IMAGE=${DOCKER_IMAGE} DOCKER_TAG=${DOCKER_TAG} TAGS=deploy
+    - make deploy DOCKER_IMAGE=${DOCKER_IMAGE} DOCKER_TAG=${DOCKER_TAG} TOKEN=$(TOKEN) TAGS=deploy
   when: manual
 
 
