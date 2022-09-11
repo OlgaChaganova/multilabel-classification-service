@@ -23,7 +23,6 @@ lint:
     script:
       - python3 -m pip install wemake-python-styleguide==0.16.1
       - make lint
-    when: manual
 
 unit_tests:
     stage: tests
@@ -31,7 +30,6 @@ unit_tests:
       - ls
       - make install_c_libs && make install && make download_weights_dvc
       - make run_unit_tests
-    when: manual
 
 integration_tests:
     stage: tests
@@ -39,7 +37,6 @@ integration_tests:
       - ls
       - make install_c_libs && make install && make download_weights_dvc
       - make run_integration_tests
-    when: manual
 
 build_image:
   stage: build
