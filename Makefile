@@ -7,7 +7,6 @@ DOCKER_IMAGE := oliyyaa_amazon_service
 DOCKER_TAG := latest
 
 
-
 .PHONY: run_app
 run_app:
 	python3 -m uvicorn app:amazon_app --host='0.0.0.0' --port=$(APP_PORT)
@@ -70,7 +69,6 @@ build:
 	docker build -f Dockerfile -t $(DOCKER_IMAGE):$(DOCKER_TAG) --force-rm=true .
 
 
-
 .PHONY: deploy
 deploy:
 	ansible-playbook -i deploy/ansible/inventory.ini  deploy/ansible/deploy.yml \
@@ -78,7 +76,6 @@ deploy:
 		-e docker_image=$(DOCKER_IMAGE) \
 		-e docker_tag=$(DOCKER_TAG) \
 		-e docker_registry_user=$(CI_REGISTRY_USER) \
-		-e docker_registry_password=$(CI_REGISTRY_PASSWORD) \
+		-e docker_registry_password=$(CI_JOB_TOKEN) \
 		-e docker_registry=$(CI_REGISTRY) \
 		--tags=$(TAGS)
-
