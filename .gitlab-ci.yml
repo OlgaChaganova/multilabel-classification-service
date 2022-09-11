@@ -56,35 +56,14 @@ build_image:
     - docker push ${DOCKER_IMAGE}:latest
   when: manual
 
-prepare:
-  stage: deploy
-  variables:
-    ANSIBLE_HOST_KEY_CHECKING: "false"
-  script:
-    - python3 -m pip install ansible==6.3.0
-    - make deploy DOCKER_IMAGE=${DOCKER_IMAGE} DOCKER_TAG=${DOCKER_TAG} TOKEN=$(READ_TOKEN) TAGS=prepare
-  when: manual
-
-
-pull:
-  stage: deploy
-  variables:
-    ANSIBLE_HOST_KEY_CHECKING: "false"
-  script:
-    - python3 -m pip install ansible==6.3.0
-    - make deploy DOCKER_IMAGE=${DOCKER_IMAGE} DOCKER_TAG=${DOCKER_TAG} TOKEN=$(READ_TOKEN) TAGS=pull
-  when: manual
-
-
 deploy:
   stage: deploy
   variables:
     ANSIBLE_HOST_KEY_CHECKING: "false"
   script:
     - python3 -m pip install ansible==6.3.0
-    - make deploy DOCKER_IMAGE=${DOCKER_IMAGE} DOCKER_TAG=${DOCKER_TAG} TOKEN=$(READ_TOKEN) TAGS=deploy
+    - make deploy DOCKER_IMAGE=${DOCKER_IMAGE} DOCKER_TAG=${DOCKER_TAG} TOKEN=$(READ_TOKEN) TAGS='prepare,pull,deploy'
   when: manual
-
 
 destroy:
   stage: deploy
