@@ -3,7 +3,6 @@ image: python:3.10
 variables:
   DOCKER_IMAGE: $CI_REGISTRY_IMAGE
   DOCKER_TAG: $CI_COMMIT_SHORT_SHA
-  TOKEN: $READ_TOKEN  # gitlab variable
 
 before_script:
     - mkdir ~/.ssh
@@ -63,7 +62,15 @@ prepare:
     ANSIBLE_HOST_KEY_CHECKING: "false"
   script:
     - python3 -m pip install ansible==6.3.0
-    - make deploy DOCKER_IMAGE=${DOCKER_IMAGE} DOCKER_TAG=${DOCKER_TAG} TOKEN=$(TOKEN) TAGS=prepare
+    - ansible-playbook -i deploy/ansible/inventory.ini  deploy/ansible/deploy.yml \
+        -e host=$(DEPLOY_HOST) \
+        -e docker_image=$(DOCKER_IMAGE) \
+        -e docker_tag=$(DOCKER_TAG) \
+        -e docker_registry_user=$(CI_REGISTRY_USER) \
+        -e docker_registry_password=$(READ_TOKEN)
+        -e docker_registry=$(CI_REGISTRY) \
+        --tags=prepare
+#    - make deploy DOCKER_IMAGE=${DOCKER_IMAGE} DOCKER_TAG=${DOCKER_TAG} TOKEN=$(READ_TOKEN) TAGS=prepare
   when: manual
 
 
@@ -73,7 +80,15 @@ pull:
     ANSIBLE_HOST_KEY_CHECKING: "false"
   script:
     - python3 -m pip install ansible==6.3.0
-    - make deploy DOCKER_IMAGE=${DOCKER_IMAGE} DOCKER_TAG=${DOCKER_TAG} TOKEN=$(TOKEN) TAGS=pull
+    - ansible-playbook -i deploy/ansible/inventory.ini  deploy/ansible/deploy.yml \
+      -e host=$(DEPLOY_HOST) \
+      -e docker_image=$(DOCKER_IMAGE) \
+      -e docker_tag=$(DOCKER_TAG) \
+      -e docker_registry_user=$(CI_REGISTRY_USER) \
+      -e docker_registry_password=$(READ_TOKEN)
+      -e docker_registry=$(CI_REGISTRY) \
+      --tags=pull
+#    - make deploy DOCKER_IMAGE=${DOCKER_IMAGE} DOCKER_TAG=${DOCKER_TAG} TOKEN=$(TOKEN) TAGS=pull
   when: manual
 
 
@@ -83,7 +98,15 @@ deploy:
     ANSIBLE_HOST_KEY_CHECKING: "false"
   script:
     - python3 -m pip install ansible==6.3.0
-    - make deploy DOCKER_IMAGE=${DOCKER_IMAGE} DOCKER_TAG=${DOCKER_TAG} TOKEN=$(TOKEN) TAGS=deploy
+    - ansible-playbook -i deploy/ansible/inventory.ini  deploy/ansible/deploy.yml \
+      -e host=$(DEPLOY_HOST) \
+      -e docker_image=$(DOCKER_IMAGE) \
+      -e docker_tag=$(DOCKER_TAG) \
+      -e docker_registry_user=$(CI_REGISTRY_USER) \
+      -e docker_registry_password=$(READ_TOKEN)
+      -e docker_registry=$(CI_REGISTRY) \
+      --tags=deploy
+#    - make deploy DOCKER_IMAGE=${DOCKER_IMAGE} DOCKER_TAG=${DOCKER_TAG} TOKEN=$(TOKEN) TAGS=deploy
   when: manual
 
 
