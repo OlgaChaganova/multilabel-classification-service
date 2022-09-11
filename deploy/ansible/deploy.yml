@@ -21,20 +21,20 @@
         mode: 0755
       tags: ['prepare']
 
-    - name: pull docker image
-      command: '{{ playbook_dest }}/pull.sh'
+    - name: Pull docker image from registry
+      ansible.builtin.command: '{{ playbook_dest }}/pull.sh'
       tags: [ 'pull' ]
 
-    - name: stop and remove existing container
-      command: "{{ playbook_dest }}/destroy.sh"
+    - name: Stop and remove existing container
+      ansible.builtin.command: "{{ playbook_dest }}/destroy.sh"
       ignore_errors: true
       tags: [ 'deploy' ]
 
     - name: run docker
-      command: "{{ playbook_dest }}/run.sh"
+      ansible.builtin.command: "{{ playbook_dest }}/run.sh"
       tags: [ 'deploy' ]
 
     - name: clean docker images and containers
-      command: "{{ playbook_dest }}/clean.sh"
+      ansible.builtin.command: "{{ playbook_dest }}/clean.sh"
       ignore_errors: true
       tags: [ 'deploy' ]
