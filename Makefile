@@ -76,9 +76,10 @@ deploy:
 		-e docker_image=$(DOCKER_IMAGE) \
 		-e docker_tag=$(DOCKER_TAG) \
 		-e docker_registry_user=$(CI_REGISTRY_USER) \
-		-e docker_registry_password=$(TOKEN)
+		-e docker_registry_password=$(CI_REGISTRY_PASSWORD) \
 		-e docker_registry=$(CI_REGISTRY) \
 		--tags=$(TAGS)
+
 
 
 .PHONY: destroy
