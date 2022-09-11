@@ -1,5 +1,6 @@
 DVC_REMOTE_NAME := dvc_remote_staging
 USERNAME := oliyyaa
+DEPLOY_HOST := target_host
 
 APP_PORT := 2202
 DOCKER_IMAGE := oliyyaa_amazon_service
@@ -67,3 +68,17 @@ run_tests:
 .PHONY: build
 build:
 	docker build -f Dockerfile -t $(DOCKER_IMAGE):$(DOCKER_TAG) --force-rm=true .
+
+
+
+.PHONY: deploy
+deploy:
+	ansible-playbook -i deploy/ansible/inventory.ini  deploy/ansible/deploy.yml \
+		-e host=$(DEPLOY_HOST) \
+		-e docker_image=$(DOCKER_IMAGE) \
+		-e docker_tag=$(DOCKER_TAG) \
+		-e docker_registry_user=$(CI_REGISTRY_USER) \
+		-e docker_registry_password=$(CI_REGISTRY_PASSWORD) \
+		-e docker_registry=$(CI_REGISTRY) \
+		--tags=$(TAGS)
+
