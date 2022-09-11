@@ -170,3 +170,5 @@ cython_debug/
 
 # label encoder
 *.npy
+
+.dvc
