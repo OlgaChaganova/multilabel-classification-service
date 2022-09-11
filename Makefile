@@ -3,8 +3,8 @@ USERNAME := oliyyaa
 DEPLOY_HOST := target_host
 
 APP_PORT := 2202
-DOCKER_IMAGE := oliyyaa_amazon_service
-DOCKER_TAG := latest
+#DOCKER_IMAGE := oliyyaa_amazon_service
+#DOCKER_TAG := latest
 
 
 .PHONY: run_app
