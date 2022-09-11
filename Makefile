@@ -79,3 +79,9 @@ deploy:
 		-e docker_registry_password=$(CI_JOB_TOKEN) \
 		-e docker_registry=$(CI_REGISTRY) \
 		--tags=$(TAGS)
+
+
+.PHONY: destroy
+destroy:
+	ansible-playbook -i deploy/ansible/inventory.ini deploy/ansible/destroy.yml \
+		-e host=$(DEPLOY_HOST)
