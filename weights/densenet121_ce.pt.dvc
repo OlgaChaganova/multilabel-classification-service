@@ -1,4 +1,0 @@
-outs:
-- md5: ea22c6a15e707a58a4aa6d35dcea81f7
-  size: 99879148
-  path: densenet121_ce.pt

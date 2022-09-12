@@ -1,4 +1,0 @@
-outs:
-- md5: d37d3f22a0ec4ce1be991e923186bcaf
-  size: 48284218
-  path: mobilenet_v3_small_ce.pt

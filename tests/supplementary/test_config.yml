@@ -1,4 +1,0 @@
-services:
-  amazon_classifier:
-    model_path: 'models/mobilenet_v3_small_ce.pt'
-    device: ${oc.env:CLASSIFIER_DEVICE,'cpu'}
