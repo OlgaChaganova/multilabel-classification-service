@@ -26,7 +26,7 @@ make install
 1. Из репозитория с моделлингом (к нему должен быть настроен доступ по ssh):
 
 ```shell
-make download_weights_shh
+make download_weights_ssh
 ```
 
 2. Используя dvc-файлы из папки `weights`:
